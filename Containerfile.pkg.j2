@@ -28,6 +28,15 @@ RUN pkg update && \
     pkg clean -ay && \
     rm -rf /var/cache/pkg/* /var/db/pkg/repos/*
 
+# Ship a signature database: containers under CIT have no network, and a first
+# start shouldn't wait minutes on a download. cont-init seeds an empty
+# /config/db from it; freshclam keeps it current from there.
+RUN mkdir -p /usr/local/share/clamav-seed && \
+    printf 'DatabaseMirror database.clamav.net\nDatabaseOwner root\n' > /tmp/freshclam.conf && \
+    freshclam --config-file=/tmp/freshclam.conf --datadir=/usr/local/share/clamav-seed && \
+    rm -f /tmp/freshclam.conf /usr/local/share/clamav-seed/freshclam.dat && \
+    chmod -R a+rX /usr/local/share/clamav-seed
+
 # Copy root filesystem
 COPY root/ /
 

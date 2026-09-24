@@ -21,5 +21,5 @@ cit:
   # clamd speaks its own TCP protocol, not HTTP
   mode: port
   port: 3310
-  # freshclam fetches the full database before clamd starts
-  wait: 900
+  # clamd loads the full signature database before it listens
+  wait: 300

@@ -44,11 +44,11 @@ LogTime yes
 CONF
 fi
 
-# Offline with an empty database: clamd refuses to start with no signatures,
-# so seed the EICAR test signature. Real signatures must be supplied by hand.
-if [ "${CLAMAV_OFFLINE:-false}" = "true" ] && [ -z "$(ls -A "$DB")" ]; then
-    echo "[clamav] CLAMAV_OFFLINE=true and $DB is empty: seeding the EICAR test signature only"
-    echo "44d88612fea8a8f36de82e1278abb02f:68:Eicar-Test-Signature" > "$DB/eicar.hdb"
+# No database yet: start from the one shipped in the image (as old as the
+# image) so clamd is up at once; freshclam brings it current.
+if ! ls "$DB"/main.c[lv]d "$DB"/daily.c[lv]d >/dev/null 2>&1; then
+    echo "[clamav] seeding $DB from the signatures shipped in the image"
+    cp -p /usr/local/share/clamav-seed/* "$DB"/
 fi
 
 chown -R bsd:bsd /config /var/run/clamav

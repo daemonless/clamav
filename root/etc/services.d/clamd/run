@@ -4,9 +4,9 @@ exec 2>&1
 
 DB=/config/db
 
-# clamd exits without signatures, and s6 would restart it every second while
-# freshclam's first download (a few hundred MB) runs. Wait for main+daily
-# instead; offline mode only needs whatever the operator put in $DB.
+# cont-init seeds $DB from the image, so this only waits if an operator
+# emptied it. clamd exits without signatures and s6 would restart it every
+# second; offline mode accepts whatever the operator put in $DB.
 has_db() {
     if [ "${CLAMAV_OFFLINE:-false}" = "true" ]; then
         [ -n "$(ls -A "$DB" 2>/dev/null)" ]

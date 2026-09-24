@@ -40,7 +40,7 @@ services:
       - PUID=1000  # User ID for the application process
       - PGID=1000  # Group ID for the application process
       - TZ=UTC  # Timezone for the container
-      - CLAMAV_OFFLINE=  # Set to true to disable freshclam (air-gapped hosts). Supply signatures in /config/db yourself; an empty database gets only the EICAR test signature.
+      - CLAMAV_OFFLINE=  # Set to true to disable freshclam (air-gapped hosts). clamd then keeps using the signatures shipped in the image, or whatever you put in /config/db.
     volumes:
       - "/path/to/containers/clamav:/config"
     ports:
@@ -222,7 +222,7 @@ Save as `clamav-deploy.yaml`, then run `ansible-playbook clamav-deploy.yaml`.
 | `PUID` | `1000` | User ID for the application process |
 | `PGID` | `1000` | Group ID for the application process |
 | `TZ` | `UTC` | Timezone for the container |
-| `CLAMAV_OFFLINE` | `` | Set to true to disable freshclam (air-gapped hosts). Supply signatures in /config/db yourself; an empty database gets only the EICAR test signature. |
+| `CLAMAV_OFFLINE` | `` | Set to true to disable freshclam (air-gapped hosts). clamd then keeps using the signatures shipped in the image, or whatever you put in /config/db. |
 
 ### Volumes
 
@@ -239,11 +239,10 @@ Save as `clamav-deploy.yaml`, then run `ansible-playbook clamav-deploy.yaml`.
 
 ## First start
 
-freshclam downloads the full signature database (a few hundred MB) into
-`/config/db` before clamd starts, so the first start takes a few minutes.
-`podman logs` shows `[clamd] waiting for the signature database` until it
-lands. Keep `/config` on a persistent volume: ClamAV's mirrors rate-limit
-hosts that re-download the whole database repeatedly.
+The image ships a signature database. On first start it is copied into
+`/config/db`, so clamd is scanning within seconds, and freshclam then
+brings it up to date. Keep `/config` on a persistent volume: ClamAV's
+mirrors rate-limit hosts that re-download the whole database repeatedly.
 
 ## Connecting
 
