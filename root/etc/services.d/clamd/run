@@ -1,0 +1,28 @@
+#!/bin/sh
+# clamd s6 service
+exec 2>&1
+
+DB=/config/db
+
+# clamd exits without signatures, and s6 would restart it every second while
+# freshclam's first download (a few hundred MB) runs. Wait for main+daily
+# instead; offline mode only needs whatever the operator put in $DB.
+has_db() {
+    if [ "${CLAMAV_OFFLINE:-false}" = "true" ]; then
+        [ -n "$(ls -A "$DB" 2>/dev/null)" ]
+    else
+        ls "$DB"/main.c[lv]d "$DB"/daily.c[lv]d >/dev/null 2>&1
+    fi
+}
+i=0
+until has_db; do
+    [ $((i % 12)) -eq 0 ] && echo "[clamd] waiting for the signature database in $DB"
+    i=$((i + 1))
+    sleep 5
+done
+
+s6-ready-when /healthz
+
+echo "[clamd] starting"
+exec s6-setuidgid bsd /usr/local/sbin/clamd --foreground \
+    --config-file=/config/clamd.conf

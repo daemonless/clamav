@@ -1,0 +1,16 @@
+#!/bin/sh
+# clamav-milter s6 service: milter on TCP 7357, scanning through clamd
+exec 2>&1
+
+# The milter exits if clamd isn't answering yet (first start waits on the
+# signature download), which s6 would turn into a restart loop.
+i=0
+until /healthz; do
+    [ $((i % 12)) -eq 0 ] && echo "[clamav-milter] waiting for clamd"
+    i=$((i + 1))
+    sleep 5
+done
+
+echo "[clamav-milter] starting on port 7357"
+exec s6-setuidgid bsd /usr/local/sbin/clamav-milter \
+    --config-file=/config/clamav-milter.conf

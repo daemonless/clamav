@@ -1,0 +1,11 @@
+#!/bin/sh
+# freshclam s6 service: keeps /config/db current and tells clamd to reload
+exec 2>&1
+
+if [ "${CLAMAV_OFFLINE:-false}" = "true" ]; then
+    echo "[freshclam] CLAMAV_OFFLINE=true: signature updates disabled"
+    exec sleep infinity
+fi
+
+exec s6-setuidgid bsd /usr/local/bin/freshclam --daemon --foreground \
+    --config-file=/config/freshclam.conf

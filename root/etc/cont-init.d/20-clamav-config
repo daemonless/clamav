@@ -1,0 +1,54 @@
+#!/bin/sh
+set -e
+
+DB=/config/db
+mkdir -p "$DB" /var/run/clamav
+
+# Written once; edit /config/*.conf freely afterwards. Full option lists:
+# /usr/local/etc/clamd.conf.sample and freshclam.conf.sample.
+if [ ! -f /config/clamd.conf ]; then
+    cat > /config/clamd.conf <<'CONF'
+Foreground yes
+DatabaseDirectory /config/db
+TCPSocket 3310
+LocalSocket /var/run/clamav/clamd.sock
+PidFile /var/run/clamav/clamd.pid
+LogTime yes
+CONF
+fi
+
+if [ ! -f /config/freshclam.conf ]; then
+    cat > /config/freshclam.conf <<'CONF'
+Foreground yes
+DatabaseDirectory /config/db
+DatabaseMirror database.clamav.net
+NotifyClamd /config/clamd.conf
+PidFile /var/run/clamav/freshclam.pid
+LogTime yes
+CONF
+fi
+
+# Milter for MTAs (Stalwart, Postfix, Sendmail). Reject, not the upstream
+# default Quarantine: not every MTA implements the milter quarantine action.
+if [ ! -f /config/clamav-milter.conf ]; then
+    cat > /config/clamav-milter.conf <<'CONF'
+Foreground yes
+MilterSocket inet:7357
+ClamdSocket unix:/var/run/clamav/clamd.sock
+PidFile /var/run/clamav/clamav-milter.pid
+OnInfected Reject
+OnFail Defer
+AddHeader Replace
+LogInfected Basic
+LogTime yes
+CONF
+fi
+
+# Offline with an empty database: clamd refuses to start with no signatures,
+# so seed the EICAR test signature. Real signatures must be supplied by hand.
+if [ "${CLAMAV_OFFLINE:-false}" = "true" ] && [ -z "$(ls -A "$DB")" ]; then
+    echo "[clamav] CLAMAV_OFFLINE=true and $DB is empty: seeding the EICAR test signature only"
+    echo "44d88612fea8a8f36de82e1278abb02f:68:Eicar-Test-Signature" > "$DB/eicar.hdb"
+fi
+
+chown -R bsd:bsd /config /var/run/clamav

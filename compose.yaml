@@ -1,0 +1,69 @@
+name: clamav
+
+x-daemonless:
+  title: "ClamAV"
+  icon: ":material-shield-bug:"
+  category: "Infrastructure"
+  description: "Open-source anti-virus engine: clamd scans files and mail over TCP, with freshclam keeping signatures current."
+  upstream_url: "https://github.com/Cisco-Talos/clamav"
+  web_url: "https://www.clamav.net/"
+  freshports_url: "https://www.freshports.org/security/clamav/"
+  user: "bsd"
+  mlock: false
+  community: "Discord:https://discord.gg/Kb9tkhecZT"
+
+  docs:
+    env:
+      PUID: "User ID for the application process"
+      PGID: "Group ID for the application process"
+      TZ: "Timezone for the container"
+      CLAMAV_OFFLINE:
+        desc: "Set to true to disable freshclam (air-gapped hosts). Supply signatures in /config/db yourself; an empty database gets only the EICAR test signature."
+        optional: true
+    volumes:
+      /config: "clamd.conf, freshclam.conf and the signature database (db/)"
+    ports:
+      3310: "clamd TCP socket (INSTREAM scanning)"
+      7357: "clamav-milter, for MTAs such as Stalwart or Postfix"
+
+  notes: |
+    ## First start
+
+    freshclam downloads the full signature database (a few hundred MB) into
+    `/config/db` before clamd starts, so the first start takes a few minutes.
+    `podman logs` shows `[clamd] waiting for the signature database` until it
+    lands. Keep `/config` on a persistent volume: ClamAV's mirrors rate-limit
+    hosts that re-download the whole database repeatedly.
+
+    ## Connecting
+
+    Scanners talk to clamd directly on TCP port `3310`. Mail servers that speak
+    the milter protocol (Stalwart, Postfix, Sendmail) use `clamav-milter` on
+    port `7357` instead; it rejects infected messages during the SMTP session.
+    To check clamd from the host:
+    `podman exec clamav clamdscan --ping 1 --config-file=/config/clamd.conf`.
+
+    ## Memory
+
+    clamd keeps every signature in RAM, and while it reloads after an update it
+    briefly holds two copies. Give the container a few GB of headroom.
+
+services:
+  clamav:
+    image: ghcr.io/daemonless/clamav:latest
+    container_name: clamav
+    # "always", not "unless-stopped": FreeBSD's podman rc.d only auto-starts
+    # containers with restart-policy=always at boot (needs podman_enable=YES).
+    restart: always
+
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=UTC
+
+    volumes:
+      - /path/to/containers/clamav:/config
+
+    ports:
+      - 3310:3310
+      - 7357:7357

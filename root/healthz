@@ -1,0 +1,3 @@
+#!/bin/sh
+# Daemonless standard healthcheck for clamav: clamd answers PING
+/usr/local/bin/clamdscan --ping 1 --config-file=/config/clamd.conf >/dev/null 2>&1
