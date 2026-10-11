@@ -42,7 +42,7 @@ services:
       - TZ=UTC  # Timezone for the container
       - CLAMAV_OFFLINE=  # Set to true to disable freshclam (air-gapped hosts). clamd then keeps using the signatures shipped in the image, or whatever you put in /config/db.
     volumes:
-      - "/path/to/containers/clamav:/config"
+      - "/containers/clamav:/config"
     ports:
       - "3310:3310"
       - "7357:7357"
@@ -91,7 +91,7 @@ services:
       - clamav: /config
 volumes:
   clamav:
-    device: '/path/to/containers/clamav'
+    device: '/containers/clamav'
 ```
 
 **Makejail**:
@@ -107,49 +107,6 @@ OPTION from=ghcr.io/daemonless/clamav:${tag}
 ```
 
 Save the files above, then run `appjail-director up`.
-
-
-> [!WARNING]
-> Exposing ports in AppJail means that your service can be reached from remote hosts. If that is not your intention, do not expose the ports and communicate with the service using the jail's IPv4 address or hostname assigned by the virtual network.
->
-> To avoid exposing ports, just remove the `expose` option in your `appjail-director.yml` or from your command-line arguments.
-
-### Podman CLI
-
-```bash
-podman run -d --name clamav \
-  -p 3310:3310 \
-  -p 7357:7357 \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e CLAMAV_OFFLINE= \
-  -v /path/to/containers/clamav:/config \
-  ghcr.io/daemonless/clamav:latest
-```
-
-Save as `run.sh`, then run `sh run.sh`.
-
-### AppJail
-
-
-```bash
-appjail oci run -Pd \
-  -o overwrite=force \
-  -o container="args:--pull" \
-  -o virtualnet=":<random> default" \
-  -o nat \
-  -o expose="3310:3310 proto:tcp" \
-  -o expose="7357:7357 proto:tcp" \
-  -e PUID=1000 \
-  -e PGID=1000 \
-  -e TZ=UTC \
-  -e CLAMAV_OFFLINE= \
-  -o fstab="/path/to/containers/clamav /config <pseudofs>" \
-  ghcr.io/daemonless/clamav:latest clamav
-```
-
-Save the files above, then run `sh run.sh`.
 
 
 > [!WARNING]
@@ -175,43 +132,10 @@ services:
       - TZ=UTC
       - CLAMAV_OFFLINE=
     volumes:
-      - "/path/to/containers/clamav:/config"
+      - "/containers/clamav:/config"
 ```
 
-Save as `bastille-compose.yml`, then run `bastille up`. Or via CLI:
-
-```bash
-bastille create -O \
-  --env PUID=1000 \
-  --env PGID=1000 \
-  --env TZ=UTC \
-  --env CLAMAV_OFFLINE= \
-  --volume /path/to/containers/clamav /config \
-  clamav ghcr.io/daemonless/clamav:latest inherit
-```
-
-### Ansible
-
-```yaml
-- name: Deploy clamav
-  containers.podman.podman_container:
-    name: clamav
-    image: "ghcr.io/daemonless/clamav:latest"
-    state: started
-    restart_policy: always
-    env:
-      PUID: "1000"
-      PGID: "1000"
-      TZ: "UTC"
-      CLAMAV_OFFLINE: ""
-    ports:
-      - "3310:3310"
-      - "7357:7357"
-    volumes:
-      - "/path/to/containers/clamav:/config"
-```
-
-Save as `clamav-deploy.yaml`, then run `ansible-playbook clamav-deploy.yaml`.
+Save as `bastille-compose.yml`, then run `bastille up`.
 
 ## Parameters
 
