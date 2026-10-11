@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-08T21:50:24Z",
+  "generated": "2026-10-11T07:41:54Z",
   "image": "clamav",
   "tags": {
     "pkg-aarch64": {
       "app_version": "1.5.4_1,1",
       "arch": "aarch64",
-      "generated": "2026-10-08T21:49:16Z",
+      "generated": "2026-10-11T07:40:44Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -466,7 +466,7 @@
     "pkg-latest-aarch64": {
       "app_version": "1.5.4_1,1",
       "arch": "aarch64",
-      "generated": "2026-10-08T21:49:21Z",
+      "generated": "2026-10-11T07:40:49Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
