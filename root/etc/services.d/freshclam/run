@@ -4,7 +4,7 @@ exec 2>&1
 
 if [ "${CLAMAV_OFFLINE:-false}" = "true" ]; then
     echo "[freshclam] CLAMAV_OFFLINE=true: signature updates disabled"
-    exec sleep infinity
+    exec sleep 2147483647 # FreeBSD sleep has no "infinity"
 fi
 
 exec s6-setuidgid bsd /usr/local/bin/freshclam --daemon --foreground \
