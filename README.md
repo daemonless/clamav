@@ -40,7 +40,7 @@ services:
       - PUID=1000  # User ID for the application process
       - PGID=1000  # Group ID for the application process
       - TZ=UTC  # Timezone for the container
-      - CLAMAV_OFFLINE=  # Set to true to disable freshclam (air-gapped hosts). clamd then keeps using the signatures shipped in the image, or whatever you put in /config/db.
+      # - CLAMAV_OFFLINE=  # Set to true to disable freshclam (air-gapped hosts). clamd then keeps using the signatures shipped in the image, or whatever you put in /config/db.
     volumes:
       - "/containers/clamav:/config"
     ports:
@@ -62,7 +62,6 @@ DIRECTOR_PROJECT=clamav
 PUID=1000
 PGID=1000
 TZ=UTC
-CLAMAV_OFFLINE=
 ```
 
 **appjail-director.yml**:
@@ -86,7 +85,6 @@ services:
         - PUID: !ENV '${PUID}'
         - PGID: !ENV '${PGID}'
         - TZ: !ENV '${TZ}'
-        - CLAMAV_OFFLINE: !ENV '${CLAMAV_OFFLINE}'
     volumes:
       - clamav: /config
 volumes:
@@ -130,7 +128,6 @@ services:
       - PUID=1000
       - PGID=1000
       - TZ=UTC
-      - CLAMAV_OFFLINE=
     volumes:
       - "/containers/clamav:/config"
 ```
