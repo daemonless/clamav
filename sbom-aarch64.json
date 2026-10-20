@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-18T07:31:56Z",
+  "generated": "2026-10-20T00:30:13Z",
   "image": "clamav",
   "tags": {
     "pkg-aarch64": {
       "app_version": "1.5.4_1,1",
       "arch": "aarch64",
-      "generated": "2026-10-18T07:30:50Z",
+      "generated": "2026-10-20T00:28:55Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -464,9 +464,9 @@
       }
     },
     "pkg-latest-aarch64": {
-      "app_version": "1.5.4_1,1",
+      "app_version": "1.5.4_2,1",
       "arch": "aarch64",
-      "generated": "2026-10-18T07:30:54Z",
+      "generated": "2026-10-20T00:28:59Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -748,7 +748,7 @@
               "GPLv2"
             ],
             "name": "clamav",
-            "version": "1.5.4_1,1"
+            "version": "1.5.4_2,1"
           },
           {
             "licenses": [
