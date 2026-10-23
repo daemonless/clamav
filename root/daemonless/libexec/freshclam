@@ -1,5 +1,5 @@
 #!/bin/sh
-# freshclam s6 service: keeps /config/db current and tells clamd to reload
+# freshclam rcd unit: keeps /config/db current and tells clamd to reload
 exec 2>&1
 
 if [ "${CLAMAV_OFFLINE:-false}" = "true" ]; then
@@ -7,5 +7,5 @@ if [ "${CLAMAV_OFFLINE:-false}" = "true" ]; then
     exec sleep 2147483647 # FreeBSD sleep has no "infinity"
 fi
 
-exec s6-setuidgid bsd /usr/local/bin/freshclam --daemon --foreground \
+exec dsu bsd /usr/local/bin/freshclam --daemon --foreground \
     --config-file=/config/freshclam.conf

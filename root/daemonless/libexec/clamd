@@ -1,11 +1,11 @@
 #!/bin/sh
-# clamd s6 service
+# clamd rcd unit
 exec 2>&1
 
 DB=/config/db
 
 # cont-init seeds $DB from the image, so this only waits if an operator
-# emptied it. clamd exits without signatures and s6 would restart it every
+# emptied it. clamd exits without signatures and rcd would restart it every
 # second; offline mode accepts whatever the operator put in $DB.
 has_db() {
     if [ "${CLAMAV_OFFLINE:-false}" = "true" ]; then
@@ -21,8 +21,6 @@ until has_db; do
     sleep 5
 done
 
-s6-ready-when /healthz
-
 echo "[clamd] starting"
-exec s6-setuidgid bsd /usr/local/sbin/clamd --foreground \
+exec dsu bsd /usr/local/sbin/clamd --foreground \
     --config-file=/config/clamd.conf
