@@ -1,11 +1,11 @@
 {
-  "generated": "2026-10-20T00:30:13Z",
+  "generated": "2026-10-23T17:33:34Z",
   "image": "clamav",
   "tags": {
     "pkg-aarch64": {
       "app_version": "1.5.4_1,1",
       "arch": "aarch64",
-      "generated": "2026-10-20T00:28:55Z",
+      "generated": "2026-10-23T17:32:33Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -181,13 +181,6 @@
             "licenses": [
               "BSD2CLAUSE"
             ],
-            "name": "FreeBSD-rc",
-            "version": "15.1"
-          },
-          {
-            "licenses": [
-              "BSD2CLAUSE"
-            ],
             "name": "FreeBSD-resolvconf",
             "version": "15.1"
           },
@@ -196,7 +189,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -245,7 +238,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -280,7 +273,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.130"
+            "version": "3.131"
           },
           {
             "licenses": [
@@ -298,13 +291,6 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "execline",
-            "version": "2.9.8.1"
-          },
-          {
-            "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "indexinfo",
@@ -413,20 +399,6 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "s6",
-            "version": "2.14.0.1"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "skalibs",
-            "version": "2.14.5.1"
-          },
-          {
-            "licenses": [
               "PD"
             ],
             "name": "unzoo",
@@ -452,7 +424,7 @@
       "source": "pkg",
       "summary": {
         "dotnet": 0,
-        "freebsd": 61,
+        "freebsd": 57,
         "go": 0,
         "java": 0,
         "node": 0,
@@ -460,13 +432,13 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 61
+        "total": 57
       }
     },
     "pkg-latest-aarch64": {
       "app_version": "1.5.4_2,1",
       "arch": "aarch64",
-      "generated": "2026-10-20T00:28:59Z",
+      "generated": "2026-10-23T17:32:36Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -642,13 +614,6 @@
             "licenses": [
               "BSD2CLAUSE"
             ],
-            "name": "FreeBSD-rc",
-            "version": "15.1"
-          },
-          {
-            "licenses": [
-              "BSD2CLAUSE"
-            ],
             "name": "FreeBSD-resolvconf",
             "version": "15.1"
           },
@@ -657,7 +622,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -706,7 +671,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p4"
+            "version": "15.1p5"
           },
           {
             "licenses": [
@@ -741,7 +706,7 @@
               "MPL20"
             ],
             "name": "ca_root_nss",
-            "version": "3.130"
+            "version": "3.131"
           },
           {
             "licenses": [
@@ -756,13 +721,6 @@
             ],
             "name": "curl",
             "version": "8.22.0"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "execline",
-            "version": "2.9.8.1"
           },
           {
             "licenses": [
@@ -874,20 +832,6 @@
           },
           {
             "licenses": [
-              "ISCL"
-            ],
-            "name": "s6",
-            "version": "2.14.0.1"
-          },
-          {
-            "licenses": [
-              "ISCL"
-            ],
-            "name": "skalibs",
-            "version": "2.14.5.1"
-          },
-          {
-            "licenses": [
               "PD"
             ],
             "name": "unzoo",
@@ -913,7 +857,7 @@
       "source": "pkg",
       "summary": {
         "dotnet": 0,
-        "freebsd": 61,
+        "freebsd": 57,
         "go": 0,
         "java": 0,
         "node": 0,
@@ -921,7 +865,7 @@
         "python": 0,
         "ruby": 0,
         "rust": 0,
-        "total": 61
+        "total": 57
       }
     }
   }
