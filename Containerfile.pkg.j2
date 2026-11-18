@@ -3,9 +3,8 @@ FROM ghcr.io/daemonless/base-rcd:${BASE_VERSION}
 
 ARG FREEBSD_ARCH=amd64
 ARG PKG_NAME="clamav"
-{% if packages == pkgname %}ARG PACKAGES="${PKG_NAME}"
-{% else %}ARG PACKAGES="clamav"
-{% endif %}
+ARG PACKAGES="${PKG_NAME}"
+
 LABEL org.opencontainers.image.title="ClamAV" \
       org.opencontainers.image.description="Open-source anti-virus engine: clamd scans files and mail over TCP, with freshclam keeping signatures current." \
       org.opencontainers.image.source="https://github.com/daemonless/clamav" \
