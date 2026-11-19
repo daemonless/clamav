@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-04T12:46:16Z",
+  "generated": "2026-11-19T03:54:26Z",
   "image": "clamav",
   "tags": {
     "pkg-aarch64": {
       "app_version": "1.5.4_1,1",
       "arch": "aarch64",
-      "generated": "2026-11-04T12:44:48Z",
+      "generated": "2026-11-19T03:52:16Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -388,7 +388,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.8.4"
+            "version": "2.9.2"
           },
           {
             "licenses": [
@@ -438,7 +438,7 @@
     "pkg-latest-aarch64": {
       "app_version": "1.5.4_2,1",
       "arch": "aarch64",
-      "generated": "2026-11-04T12:44:53Z",
+      "generated": "2026-11-19T03:52:20Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -821,7 +821,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.8.4"
+            "version": "2.9.0"
           },
           {
             "licenses": [
