@@ -1,11 +1,11 @@
 {
-  "generated": "2026-11-18T22:28:05Z",
+  "generated": "2026-11-25T13:36:30Z",
   "image": "clamav",
   "tags": {
     "pkg-amd64": {
       "app_version": "1.5.4_1,1",
       "arch": "amd64",
-      "generated": "2026-11-18T21:36:58Z",
+      "generated": "2026-11-25T13:24:08Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -77,7 +77,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libarchive",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -105,7 +105,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libldns",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -154,14 +154,14 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1p4"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -175,7 +175,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -189,7 +189,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p6"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -224,7 +224,7 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-zfs-lib",
-            "version": "15.1p1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -238,7 +238,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p5"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -438,7 +438,7 @@
     "pkg-latest-amd64": {
       "app_version": "1.5.4_2,1",
       "arch": "amd64",
-      "generated": "2026-11-18T22:27:19Z",
+      "generated": "2026-11-25T13:24:12Z",
       "packages": {
         "dotnet": [],
         "freebsd": [
@@ -510,7 +510,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libarchive",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -538,7 +538,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-libldns",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -587,14 +587,14 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-openssl-lib",
-            "version": "15.1p4"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -608,7 +608,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-pkg-bootstrap",
-            "version": "15.1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -622,7 +622,7 @@
               "BSD2CLAUSE"
             ],
             "name": "FreeBSD-runtime",
-            "version": "15.1p6"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -657,7 +657,7 @@
               "CDDL-1.0"
             ],
             "name": "FreeBSD-zfs-lib",
-            "version": "15.1p1"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -671,7 +671,7 @@
               "PD"
             ],
             "name": "FreeBSD-zoneinfo",
-            "version": "15.1p5"
+            "version": "15.1p7"
           },
           {
             "licenses": [
@@ -699,7 +699,7 @@
               "MIT"
             ],
             "name": "brotli",
-            "version": "1.2.1,1"
+            "version": "1.2.1_1,1"
           },
           {
             "licenses": [
@@ -821,7 +821,7 @@
               "BSD2CLAUSE"
             ],
             "name": "pkg",
-            "version": "2.9.2"
+            "version": "2.9.3"
           },
           {
             "licenses": [
